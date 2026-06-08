@@ -104,6 +104,18 @@ const PROJECTS = [
     color: "#6C63FF",
     emoji: "💰",
   },
+  {
+    id: 3,
+    title: "KIW-Photo",
+    tagline: "Platform Manajemen Foto berbasis Web",
+    stack: ["HTML", "CSS", "JavaScript", "PHP", "MySQL"],
+    description: "Aplikasi web untuk manajemen dan berbagi foto secara kolaboratif. Dibangun bersama tim dan telah memperoleh pengakuan resmi Hak Kekayaan Intelektual (HKI) dari Direktorat Jenderal Kekayaan Intelektual Republik Indonesia.",
+    features: ["Photo upload & management", "Collaborative team project", "HKI Certified by DJKI RI", "Web-based platform", "User-friendly interface"],
+    github: "https://github.com/SulthanAndyno/KIW-Photo",
+    hki: "/sertifikat-hki-kiw-photo.pdf",
+    color: "#F59E0B",
+    emoji: "📸",
+  },
 ];
 
 const CERTS = [
@@ -466,7 +478,7 @@ export default function Home() {
             <h2 className="text-2xl font-bold" style={{ color: "var(--text)" }}>Projects</h2>
           </motion.div>
           <motion.p variants={fadeUp} className="text-sm mb-8 font-mono" style={{ color: "var(--text-muted)" }}>
-            // 2 project yang udah di-build & di-deploy
+            // 3 project yang udah di-build & di-deploy
           </motion.p>
 
           <motion.div variants={stagger} className="grid grid-cols-1 md:grid-cols-2 gap-6">
@@ -522,16 +534,45 @@ export default function Home() {
 
         {/* ── CERTIFICATIONS ── */}
         <motion.section initial="hidden" whileInView="visible" viewport={{ once: true, margin: "-80px" }} variants={stagger} className="mb-20">
-          <motion.div variants={fadeUp} className="flex items-center gap-3 mb-6">
+          <motion.div variants={fadeUp} className="flex items-center gap-3 mb-2">
             <Server size={20} style={{ color: "var(--cyan)" }} />
-            <h2 className="text-2xl font-bold" style={{ color: "var(--text)" }}>Certifications</h2>
+            <h2 className="text-2xl font-bold" style={{ color: "var(--text)" }}>Certifications & Achievements</h2>
           </motion.div>
-          <motion.div variants={fadeUp} className="glass rounded-2xl p-8 flex items-center gap-4" style={{ border: "1px solid var(--border)" }}>
-            <span className="text-3xl">🚧</span>
-            <div>
-              <p className="font-semibold" style={{ color: "var(--text)" }}>On Going...</p>
-              <p className="text-sm font-mono" style={{ color: "var(--text-muted)" }}>Sedang dalam proses — stay tuned!</p>
-            </div>
+          <motion.p variants={fadeUp} className="text-sm mb-6 font-mono" style={{ color: "var(--text-muted)" }}>
+            // Pengakuan resmi atas karya & pencapaian
+          </motion.p>
+          <motion.div variants={stagger} className="grid grid-cols-1 md:grid-cols-2 gap-4">
+            {/* HKI Card */}
+            <motion.div variants={fadeUp}
+              className="glass rounded-2xl p-6 card-hover"
+              style={{ border: "1px solid #F59E0B44", background: "linear-gradient(135deg, var(--surface) 0%, #F59E0B08 100%)" }}>
+              <div className="flex items-start gap-4">
+                <span className="text-3xl">📜</span>
+                <div className="flex-1 min-w-0">
+                  <div className="flex items-center gap-2 flex-wrap mb-1">
+                    <h3 className="font-bold text-sm" style={{ color: "var(--text)" }}>Hak Kekayaan Intelektual (HKI)</h3>
+                    <span className="text-xs font-mono px-2 py-0.5 rounded-full flex-shrink-0" style={{ background: "#F59E0B22", color: "#F59E0B", border: "1px solid #F59E0B44" }}>🏅 Resmi DJKI RI</span>
+                  </div>
+                  <p className="text-xs mb-1" style={{ color: "#F59E0B" }}>KIW-Photo · Kolaborasi Tim</p>
+                  <p className="text-xs mb-3" style={{ color: "var(--text-muted)" }}>Direktorat Jenderal Kekayaan Intelektual, Republik Indonesia — 2026</p>
+                  <a href="/sertifikat-hki-kiw-photo.pdf" target="_blank" rel="noopener noreferrer"
+                    className="inline-flex items-center gap-1.5 text-xs font-semibold px-3 py-1.5 rounded-lg transition-all"
+                    style={{ background: "#F59E0B22", color: "#F59E0B", border: "1px solid #F59E0B44" }}
+                    onMouseEnter={e => { (e.currentTarget as HTMLElement).style.background = "#F59E0B33"; }}
+                    onMouseLeave={e => { (e.currentTarget as HTMLElement).style.background = "#F59E0B22"; }}>
+                    <ExternalLink size={12} /> Lihat Sertifikat
+                  </a>
+                </div>
+              </div>
+            </motion.div>
+            {/* Ongoing Card */}
+            <motion.div variants={fadeUp} className="glass rounded-2xl p-6 flex items-center gap-4" style={{ border: "1px solid var(--border)" }}>
+              <span className="text-3xl">🚧</span>
+              <div>
+                <p className="font-semibold" style={{ color: "var(--text)" }}>On Going...</p>
+                <p className="text-sm font-mono" style={{ color: "var(--text-muted)" }}>Sedang dalam proses — stay tuned!</p>
+              </div>
+            </motion.div>
           </motion.div>
         </motion.section>
 
