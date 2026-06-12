@@ -3,15 +3,12 @@
 import React, { useState, useEffect, useRef, FormEvent } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Github, Linkedin, Mail, ExternalLink, X, ChevronRight, Terminal, Server, Code2, Database, Globe, Layers, ArrowUpRight, Send, CheckCircle, AlertCircle, Loader2 } from "lucide-react";
-import emailjs from "@emailjs/browser";
 
-// ── EmailJS Config — isi setelah daftar di emailjs.com ──────────────
-const EJ_SERVICE  = "YOUR_SERVICE_ID";   // ganti ini
-const EJ_TEMPLATE = "YOUR_TEMPLATE_ID";  // ganti ini
-const EJ_PUBLIC   = "YOUR_PUBLIC_KEY";   // ganti ini
+// ── Web3Forms Config ────────────────────────────────────────────────
+const W3F_ACCESS_KEY = process.env.NEXT_PUBLIC_WEB3FORMS_KEY || "YOUR_ACCESS_KEY";
 
 // ── Animations ──────────────────────────────────────────────────────
-const fadeUp = { hidden: { opacity: 0, y: 24 }, visible: { opacity: 1, y: 0, transition: { duration: 0.5, ease: "easeOut" } } };
+const fadeUp = { hidden: { opacity: 0, y: 24 }, visible: { opacity: 1, y: 0, transition: { duration: 0.5, ease: "easeOut" as const } } };
 const stagger = { hidden: { opacity: 0 }, visible: { opacity: 1, transition: { staggerChildren: 0.1 } } };
 
 // ── Typing Hook ──────────────────────────────────────────────────────
@@ -69,11 +66,11 @@ function Particles() {
 const ROLES = ["Web Developer", "React Developer", "Frontend Developer", "JavaScript Dev"];
 
 const SKILLS = [
-  { name: "React / JSX", icon: <Layers size={16} />, level: 20, cat: "Frontend" },
-  { name: "JavaScript (ES6+)", icon: <Code2 size={16} />, level: 20, cat: "Language" },
-  { name: "Vite / Bundler", icon: <Terminal size={16} />, level: 20, cat: "Tooling" },
-  { name: "CSS / Tailwind", icon: <Globe size={16} />, level: 20, cat: "Styling" },
-  { name: "Firebase / Auth", icon: <Server size={16} />, level: 20, cat: "Backend" },
+  { name: "React / JSX", icon: <Layers size={16} />, level: 50, cat: "Frontend" },
+  { name: "JavaScript (ES6+)", icon: <Code2 size={16} />, level: 30, cat: "Language" },
+  { name: "Vite / Bundler (Learing)", icon: <Terminal size={16} />, level: 10, cat: "Tooling" },
+  { name: "CSS / Tailwind", icon: <Globe size={16} />, level: 30, cat: "Styling" },
+  { name: "Firebase / Auth (Learning)", icon: <Server size={16} />, level: 20, cat: "Backend" },
   { name: "REST API", icon: <Database size={16} />, level: 20, cat: "Integration" },
   { name: "Docker (Learning)", icon: <Server size={16} />, level: 20, cat: "DevOps" },
   { name: "Git / GitHub", icon: <Code2 size={16} />, level: 50, cat: "Tooling" },
@@ -112,6 +109,7 @@ const PROJECTS = [
     description: "Aplikasi web untuk manajemen dan berbagi foto secara kolaboratif. Dibangun bersama tim dan telah memperoleh pengakuan resmi Hak Kekayaan Intelektual (HKI) dari Direktorat Jenderal Kekayaan Intelektual Republik Indonesia.",
     features: ["Photo upload & management", "Collaborative team project", "HKI Certified by DJKI RI", "Web-based platform", "User-friendly interface"],
     github: "https://github.com/SulthanAndyno/KIW-Photo",
+    live: "https://kiw-photo.netlify.app",
     hki: "/sertifikat-hki-kiw-photo.pdf",
     color: "#F59E0B",
     emoji: "📸",
@@ -212,9 +210,24 @@ function ContactSection() {
     if (!form.name || !form.email || !form.message) return;
     setStatus("loading");
     try {
-      await emailjs.sendForm(EJ_SERVICE, EJ_TEMPLATE, formRef.current!, EJ_PUBLIC);
-      setStatus("success");
-      setForm({ name: "", email: "", message: "" });
+      const res = await fetch("https://api.web3forms.com/submit", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          access_key: W3F_ACCESS_KEY,
+          name: form.name,
+          email: form.email,
+          message: form.message,
+          subject: `Portfolio Contact: ${form.name}`,
+        }),
+      });
+      const data = await res.json();
+      if (data.success) {
+        setStatus("success");
+        setForm({ name: "", email: "", message: "" });
+      } else {
+        setStatus("error");
+      }
     } catch {
       setStatus("error");
     }
@@ -325,7 +338,17 @@ function ContactSection() {
                   <button type="submit" disabled={status === "loading"}
                     className="flex items-center justify-center gap-2 py-3 rounded-xl font-semibold text-sm transition-all glow-cyan"
                     style={{ background: "var(--cyan)", color: "#0A0F1E", opacity: status === "loading" ? 0.7 : 1 }}>
-                    {status === "loading" ? <><Loader2 size={16} className="animate-spin" /> Mengirim...</> : <><Send size={16} /> Kirim Pesan</>}
+                    {status === "loading" ? (
+                      <span className="flex items-center gap-2">
+                        <Loader2 size={16} className="animate-spin" />
+                        <span>Mengirim...</span>
+                      </span>
+                    ) : (
+                      <span className="flex items-center gap-2">
+                        <Send size={16} />
+                        <span>Kirim Pesan</span>
+                      </span>
+                    )}
                   </button>
                 </motion.form>
               )}
@@ -394,7 +417,7 @@ export default function Home() {
               </motion.div>
 
               <motion.p variants={fadeUp} className="text-base leading-relaxed mb-8 max-w-md" style={{ color: "var(--text-muted)" }}>
-                Seorang developer yang passionate membangun web app yang berdampak. Saat ini aktif belajar dan mengembangkan diri — setiap project adalah langkah maju.
+              Seorang mahasiswa Telkom University yang sedang aktif meningkatkan & membangun skill di bidang Web Developer.
               </motion.p>
 
               <motion.div variants={fadeUp} className="flex flex-wrap gap-3">
@@ -446,9 +469,6 @@ export default function Home() {
             <Terminal size={20} style={{ color: "var(--cyan)" }} />
             <h2 className="text-2xl font-bold" style={{ color: "var(--text)" }}>Tech Stack</h2>
           </motion.div>
-          <motion.p variants={fadeUp} className="text-sm mb-8 font-mono" style={{ color: "var(--text-muted)" }}>
-            // Masih terus belajar & berkembang — progress bar = tingkat kepercayaan diri saat ini
-          </motion.p>
 
           <motion.div variants={stagger} className="grid grid-cols-1 md:grid-cols-2 gap-4">
             {SKILLS.map((sk, i) => (
@@ -477,9 +497,6 @@ export default function Home() {
             <Code2 size={20} style={{ color: "var(--cyan)" }} />
             <h2 className="text-2xl font-bold" style={{ color: "var(--text)" }}>Projects</h2>
           </motion.div>
-          <motion.p variants={fadeUp} className="text-sm mb-8 font-mono" style={{ color: "var(--text-muted)" }}>
-            // 3 project yang udah di-build & di-deploy
-          </motion.p>
 
           <motion.div variants={stagger} className="grid grid-cols-1 md:grid-cols-2 gap-6">
             {PROJECTS.map(p => (
@@ -538,9 +555,6 @@ export default function Home() {
             <Server size={20} style={{ color: "var(--cyan)" }} />
             <h2 className="text-2xl font-bold" style={{ color: "var(--text)" }}>Certifications & Achievements</h2>
           </motion.div>
-          <motion.p variants={fadeUp} className="text-sm mb-6 font-mono" style={{ color: "var(--text-muted)" }}>
-            // Pengakuan resmi atas karya & pencapaian
-          </motion.p>
           <motion.div variants={stagger} className="grid grid-cols-1 md:grid-cols-2 gap-4">
             {/* HKI Card */}
             <motion.div variants={fadeUp}
