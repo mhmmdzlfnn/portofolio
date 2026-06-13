@@ -273,13 +273,13 @@ function ContactSection() {
             ].map(item => (
               <a key={item.label} href={item.href} target="_blank" rel="noopener noreferrer"
                 className="flex items-center gap-4 p-4 rounded-xl glass card-hover"
-                style={{ border: "1px solid var(--border)", textDecoration: "none" }}>
+                style={{ border: "1px solid var(--border)", textDecoration: "none", overflow: "hidden" }}>
                 <span className="p-2 rounded-lg flex-shrink-0" style={{ background: "var(--cyan-dim)", color: "var(--cyan)" }}>
                   {item.icon}
                 </span>
-                <div>
+                <div className="min-w-0 flex-1">
                   <p className="text-xs font-mono mb-0.5" style={{ color: "var(--text-muted)" }}>{item.label}</p>
-                  <p className="text-sm font-medium" style={{ color: "var(--text)" }}>{item.value}</p>
+                  <p className="text-sm font-medium" style={{ color: "var(--text)", overflow: "hidden", textOverflow: "ellipsis", whiteSpace: "nowrap" }}>{item.value}</p>
                 </div>
                 <ArrowUpRight size={14} className="ml-auto flex-shrink-0" style={{ color: "var(--text-faint)" }} />
               </a>
@@ -384,7 +384,7 @@ export default function Home() {
           {["about","skills","projects","contact"].map(s => (
             <a key={s} href={`#${s}`} className="nav-link hidden md:block capitalize">{s}</a>
           ))}
-          <a href="#contact"
+          <a href="mailto:muhammadzulfanaulia@gmail.com?subject=Hiring%20Inquiry"
             className="px-4 py-2 rounded-full text-sm font-semibold transition-all glow-cyan"
             style={{ background: "var(--cyan)", color: "#0A0F1E" }}>
             Hire Me
@@ -507,15 +507,17 @@ export default function Home() {
                 {/* Color bar */}
                 <div className="h-1 w-full" style={{ background: `linear-gradient(90deg, ${p.color}, transparent)` }} />
                 <div className="p-6">
-                  <div className="flex items-start justify-between mb-4">
-                    <div className="flex items-center gap-3">
-                      <span className="text-3xl">{p.emoji}</span>
-                      <div>
-                        <h3 className="font-bold text-lg" style={{ color: "var(--text)" }}>{p.title}</h3>
+                  <div className="flex items-start justify-between gap-2 mb-4">
+                    <div className="flex items-center gap-3 min-w-0">
+                      <span className="text-3xl flex-shrink-0">{p.emoji}</span>
+                      <div className="min-w-0">
+                        <div className="flex items-center gap-2 flex-wrap">
+                          <h3 className="font-bold text-lg" style={{ color: "var(--text)" }}>{p.title}</h3>
+                          {p.live && <span className="text-xs font-mono px-2 py-0.5 rounded-full flex-shrink-0" style={{ background: `${p.color}22`, color: p.color, border: `1px solid ${p.color}44` }}>🟢 Live</span>}
+                        </div>
                         <p className="text-xs" style={{ color: p.color }}>{p.tagline}</p>
                       </div>
                     </div>
-                    {p.live && <span className="text-xs font-mono px-2 py-0.5 rounded-full" style={{ background: `${p.color}22`, color: p.color, border: `1px solid ${p.color}44` }}>🟢 Live</span>}
                   </div>
                   <p className="text-sm leading-relaxed mb-5 line-clamp-3" style={{ color: "var(--text-muted)" }}>{p.description}</p>
                   <div className="flex flex-wrap gap-2 mb-4">
