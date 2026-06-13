@@ -93,9 +93,9 @@ const PROJECTS = [
     id: 2,
     title: "FinTrack",
     tagline: "Personal Finance Tracker App",
-    stack: ["React", "Vite", "Firebase", "JavaScript", "CSS"],
-    description: "Aplikasi manajemen keuangan pribadi yang membantu pengguna melacak pemasukan dan pengeluaran secara real-time. Dilengkapi autentikasi pengguna, dashboard analitik, dan UI yang bersih dan responsif.",
-    features: ["User authentication (Firebase)", "Income & expense tracking", "Analytics dashboard", "Responsive design", "Real-time data sync", "Category-based filtering"],
+    stack: ["React", "Vite", "Supabase", "Recharts", "CSS"],
+    description: "Aplikasi manajemen keuangan pribadi berbasis web untuk melacak pemasukan, pengeluaran, dan target tabungan secara real-time. Dilengkapi visualisasi grafik interaktif, simulasi compound interest, dan sistem keamanan autentikasi.",
+    features: ["User authentication (Supabase)", "Income & expense tracking", "Savings Goal & target tracker", "Interactive financial analytics (Recharts)", "Compound interest investment calculator", "Responsive design with Dark/Light mode theme"],
     github: "https://github.com/mhmmdzlfnn/FinTrack",
     preview: "/fintrack-preview.png",
     color: "#6C63FF",
@@ -384,7 +384,7 @@ export default function Home() {
           {["about","skills","projects","contact"].map(s => (
             <a key={s} href={`#${s}`} className="nav-link hidden md:block capitalize">{s}</a>
           ))}
-          <a href="mailto:muhammadzulfanaulia@gmail.com"
+          <a href="#contact"
             className="px-4 py-2 rounded-full text-sm font-semibold transition-all glow-cyan"
             style={{ background: "var(--cyan)", color: "#0A0F1E" }}>
             Hire Me
