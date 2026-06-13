@@ -600,7 +600,7 @@ export default function Home() {
         <div className="max-w-5xl mx-auto px-6 flex flex-col md:flex-row justify-between items-center gap-2">
           <span className="font-mono font-bold gradient-text">ZA_</span>
           <p className="text-xs font-mono" style={{ color: "var(--text-faint)" }}>
-            © {new Date().getFullYear()} Muhammad Zulfan Aulia · Built with Next.js
+            © {new Date().getFullYear()} Muhammad Zulfan Aulia
           </p>
           <div className="flex gap-4">
             {[
