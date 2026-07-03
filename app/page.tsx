@@ -381,7 +381,7 @@ export default function Home() {
         style={{ background: "rgba(10,15,30,0.8)", backdropFilter: "blur(20px)" }}>
         <span className="font-mono font-bold text-lg gradient-text">ZA_</span>
         <div className="flex items-center gap-6">
-          {["about","skills","projects","contact"].map(s => (
+          {["about", "skills", "projects", "contact"].map(s => (
             <a key={s} href={`#${s}`} className="nav-link hidden md:block capitalize">{s}</a>
           ))}
           <a href="mailto:muhammadzulfanaulia@gmail.com?subject=Hiring%20Inquiry"
@@ -417,7 +417,7 @@ export default function Home() {
               </motion.div>
 
               <motion.p variants={fadeUp} className="text-base leading-relaxed mb-8 max-w-md" style={{ color: "var(--text-muted)" }}>
-              Seorang mahasiswa Telkom University yang sedang aktif meningkatkan & membangun skill di bidang Web Developer.
+                Seorang mahasiswa Telkom University yang sedang aktif meningkatkan & membangun skill di bidang Web Developer.
               </motion.p>
 
               <motion.div variants={fadeUp} className="flex flex-wrap gap-3">
@@ -581,14 +581,55 @@ export default function Home() {
                 </div>
               </div>
             </motion.div>
-            {/* Ongoing Card */}
-            <motion.div variants={fadeUp} className="glass rounded-2xl p-6 flex items-center gap-4" style={{ border: "1px solid var(--border)" }}>
-              <span className="text-3xl">🚧</span>
-              <div>
-                <p className="font-semibold" style={{ color: "var(--text)" }}>On Going...</p>
-                <p className="text-sm font-mono" style={{ color: "var(--text-muted)" }}>Sedang dalam proses — stay tuned!</p>
+
+            {/* cyber-basic Card */}
+              <motion.div variants={fadeUp}
+                className="glass rounded-2xl p-6 card-hover"
+                style={{ border: "1px solid #F59E0B44", background: "linear-gradient(135deg, var(--surface) 0%, #F59E0B08 100%)" }}>
+                <div className="flex items-start gap-4">
+                  <span className="text-3xl">📜</span>
+                  <div className="flex-1 min-w-0">
+                    <div className="flex items-center gap-2 flex-wrap mb-1">
+                      <h3 className="font-bold text-sm" style={{ color: "var(--text)" }}>Cyber Security Course Level Basic</h3>
+                      <span className="text-xs font-mono px-2 py-0.5 rounded-full flex-shrink-0" style={{ background: "#F59E0B22", color: "#F59E0B", border: "1px solid #F59E0B44" }}>✅ Certified</span>
+                    </div>
+                    <p className="text-xs mb-1" style={{ color: "#F59E0B" }}>ITBOX</p>
+                    <p className="text-xs mb-3" style={{ color: "var(--text-muted)" }}>April 2026</p>
+                    <a href="/certificates/cyber-basic.pdf" target="_blank" rel="noopener noreferrer"
+                      className="inline-flex items-center gap-1.5 text-xs font-semibold px-3 py-1.5 rounded-lg transition-all"
+                      style={{ background: "#F59E0B22", color: "#F59E0B", border: "1px solid #F59E0B44" }}
+                      onMouseEnter={e => { (e.currentTarget as HTMLElement).style.background = "#F59E0B33"; }}
+                      onMouseLeave={e => { (e.currentTarget as HTMLElement).style.background = "#F59E0B22"; }}>
+                      <ExternalLink size={12} /> Lihat Sertifikat
+                    </a>
+                  </div>
+                </div>
+            </motion.div>
+
+            {/* GVC Card */}
+            <motion.div variants={fadeUp}
+              className="glass rounded-2xl p-6 card-hover"
+              style={{ border: "1px solid #F59E0B44", background: "linear-gradient(135deg, var(--surface) 0%, #F59E0B08 100%)" }}>
+              <div className="flex items-start gap-4">
+                <span className="text-3xl">📜</span>
+                <div className="flex-1 min-w-0">
+                  <div className="flex items-center gap-2 flex-wrap mb-1">
+                    <h3 className="font-bold text-sm" style={{ color: "var(--text)" }}>#JuaraVibeCoding Participant</h3>
+                    <span className="text-xs font-mono px-2 py-0.5 rounded-full flex-shrink-0" style={{ background: "#F59E0B22", color: "#F59E0B", border: "1px solid #F59E0B44" }}>✅ Participant</span>
+                  </div>
+                  <p className="text-xs mb-1" style={{ color: "#F59E0B" }}>Google Developer Groups</p>
+                  <p className="text-xs mb-3" style={{ color: "var(--text-muted)" }}>May 2026</p>
+                  <a href="/certificates/Sertifikat GVC.pdf" target="_blank" rel="noopener noreferrer"
+                    className="inline-flex items-center gap-1.5 text-xs font-semibold px-3 py-1.5 rounded-lg transition-all"
+                    style={{ background: "#F59E0B22", color: "#F59E0B", border: "1px solid #F59E0B44" }}
+                    onMouseEnter={e => { (e.currentTarget as HTMLElement).style.background = "#F59E0B33"; }}
+                    onMouseLeave={e => { (e.currentTarget as HTMLElement).style.background = "#F59E0B22"; }}>
+                    <ExternalLink size={12} /> Lihat Sertifikat
+                  </a>
+                </div>
               </div>
             </motion.div>
+
           </motion.div>
         </motion.section>
 
